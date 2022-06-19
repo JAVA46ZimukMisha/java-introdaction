@@ -92,8 +92,8 @@ public class IntegerPrimitives {
 		return res;
 	}
 	private static int getLength(long x) {
-		int count = 2;
-		while(x>1) {
+		int count = 1;
+		while(x>0) {
 			x/=2;
 			count++;
 		}
