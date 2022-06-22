@@ -20,9 +20,8 @@ public class Add01 {
 //
 //	Implement the tests.
 	public static int maxSubsequenceLength(int[] arr) {
-		int length = 0;
-		int count = 0;
-		for(int i = 1; i<arr.length; i++, count++) {
+		int length = arr.length>0 ? 1 : 0;
+		for(int i = 1, count = 0; i<arr.length; i++, count++) {
 			if(arr[i]!=arr[i-1] || i==arr.length-1) {
 				if (length<count) {
 					length=count;

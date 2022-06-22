@@ -13,9 +13,11 @@ class Add01Test {
 		int[] arr = {1,3,3,2,8,8,8,5,6,6}; 
 		int[] arr1 = {1,2,3,4,5};
 		int[] arr2 = new int[0];
+		int[] arr3 = {1};
 		assertEquals(3, Add01.maxSubsequenceLength(arr));
 		assertEquals(1, Add01.maxSubsequenceLength(arr1));
 		assertEquals(0, Add01.maxSubsequenceLength(arr2));
+		assertEquals(1, Add01.maxSubsequenceLength(arr3));
 	}
 
 }
