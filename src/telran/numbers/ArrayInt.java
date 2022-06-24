@@ -1,39 +1,57 @@
 package telran.numbers;
 
-import java.util.Arrays;
-
 public class ArrayInt {
-	//HW#3 
-	//Task 1
-public static int[] addNumber(int ar[], int number) {
-	int res[] = Arrays.copyOf(ar, ar.length+1);
-	res[res.length - 1] = number;
-	return res;
-}
-	//Task 2
-public static int[] insertNumber(int ar[], int index, int number) {
-	int []res = new int[ar.length+1];
-	System.arraycopy(ar, 0, res, 0, index);
-	res[index]=number;
-	System.arraycopy(ar, index, res, index+1, ar.length-index);
-	return res;
-}
-	//Task 3
-public static int[] removeNumber(int ar[], int index) {
-	int []res = new int[ar.length-1];
-	System.arraycopy(ar, 0, res, 0, index);
-	System.arraycopy(ar, index+1, res, index, ar.length-1-index);
-	return res;
-}
-public static int indexOf(int ar[], int number) {
-	// return if the given number exist in the given array then returns the index of first occurrence, otherwise  return -1
-	int res = -1;
-	for(int i=0; i<ar.length; i++) {
-		if(ar[i]==number) {
-			res = i;
+	//HW#4 
+	
+public static void sort(int[] ar) {
+	boolean isSorted;
+	for(int i = 0; i< ar.length; i++) {
+		isSorted = moveMaxToEnd(ar, i);
+		if(isSorted){
 			break;
+		}
+	}
+	
+}
+private static boolean moveMaxToEnd(int[] ar, int iter) {
+	boolean fl = true;
+	for(int i = 1; i<ar.length-iter; i++) {
+		if(ar[i-1]>ar[i]) {
+			swap(ar, i);
+			fl = false;
+		}
+	}
+	return fl;
+	}
+private static void swap(int[] ar, int index) {
+	int tmp = ar[index-1];
+	ar[index-1]=ar[index];
+	ar[index]=tmp;
+}
+
+public static int binaryIndexOf(int[] ar, int number) {
+	int left = 0, right = ar.length - 1, middle = ar.length/2, res, index = -1;
+	while(left<=right) {
+		if(ar[middle]<number) {
+			left = middle+1;
+		} else {
+			right = middle - 1; 
+			if(ar[middle]==number) {
+				index=middle;
+			}
+		}
+		middle = (left+right)/2;
+	}
+	if(index>=0) {
+		res=index;
+	}else {
+		if(middle>0) {
+			res = (middle+2)*(-1);
+		}else {
+			res = (middle+1)*(-1);
 		}
 	}
 	return res;
 }
+
 }
