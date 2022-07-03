@@ -31,23 +31,41 @@ public class Strings {
 		if(str1.length() != str2.length()) {
 			return false;
 		}
-		int[] arrHelp = new int[str1.length()];
-		for(int i = 0; i<str2.length();i++) {
-			for(int j = 0; j<str2.length(); j++) {
-				if(str2.toLowerCase().charAt(i) == str2.toLowerCase().charAt(j)){
-					arrHelp[i]++;
-				}
-			}
-		int count = 0;
-			for(int j = 0; j<arrHelp.length; j++) {
-				if(str2.toLowerCase().charAt(i) == str1.toLowerCase().charAt(j)) {
+//		int[] arrHelp = new int[str1.length()];
+//		for(int i = 0; i<str2.length();i++) {
+//			for(int j = 0; j<str2.length(); j++) {
+//				if(str2.toLowerCase().charAt(i) == str2.toLowerCase().charAt(j)){
+//					arrHelp[i]++;
+//				}
+//			}
+//		int count = 0;
+//			for(int j = 0; j<arrHelp.length; j++) {
+//				if(str2.toLowerCase().charAt(i) == str1.toLowerCase().charAt(j)) {
+//					count++;
+//				}
+//			}
+//			if(arrHelp[i] != count) {
+//				return false;
+//			}
+//			count = 0;
+//		}
+		char[] arr1 = str1.toCharArray();
+		char[] arr2 = str2.toCharArray();
+		for(int i = 0; i<arr1.length; i++) {
+			int count = 0;
+			int j = 0;
+			do{
+				if(arr1[i]==arr2[j]) {
+					arr2[j]=0;
 					count++;
 				}
+				j++;
+			}while(count == 0 && j<arr2.length);			
+				if(count == 0) {
+					return false;
+				}else {
+					count = 0;
 			}
-			if(arrHelp[i] != count) {
-				return false;
-			}
-			count = 0;
 		}
 		return true;
 	}

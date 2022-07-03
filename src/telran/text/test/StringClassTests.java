@@ -29,7 +29,7 @@ class StringClassTests {
 	void isAnagramTest() {
 		String str1 = "Hello";
 		String str2 = "Helll";
-		String str3 = "elohl";
+		String str3 = "eloHl";
 		String str4 = "Hel";
 		assertTrue(Strings.isAnagram(str1, str3));
 		assertFalse(Strings.isAnagram(str1, str2));
