@@ -6,7 +6,7 @@ public class Strings {
 		String[] nameHelp1 = name1.toLowerCase().split(" ");
 		String[] nameHelp2 = name2.toLowerCase().split(" ");
 		for(int i = 0; i<nameHelp2.length; i++) {
-			if(!isPartNameSame(nameHelp1[i], nameHelp2[i]) && nameHelp1.length == nameHelp2.length) {
+			if(nameHelp1.length == nameHelp2.length && !isPartNameSame(nameHelp1[i], nameHelp2[i])) {
 				return "no match";
 			}
 			res = checkIfLengthsNotSame(nameHelp1, nameHelp2, i);
