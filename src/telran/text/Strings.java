@@ -9,14 +9,15 @@ public class Strings {
 			if(nameHelp1.length == nameHelp2.length && !isPartNameSame(nameHelp1[i], nameHelp2[i])) {
 				return "no match";
 			}
+			if(nameHelp1.length != nameHelp2.length) {
 			res = checkIfLengthsNotSame(nameHelp1, nameHelp2, i);
+			}
 		}
 		
 		return res?"match":"no match";
 	}
 	private static boolean checkIfLengthsNotSame(String[] nameHelp1, String[] nameHelp2, int i) {
 		boolean res = true;
-		if(nameHelp1.length != nameHelp2.length) {
 			int count = 0;
 			do {
 			res = isPartNameSame(nameHelp1[i+count], nameHelp2[i]);
@@ -25,7 +26,6 @@ public class Strings {
 			if(i+count == nameHelp1.length-1 && i!=nameHelp2.length-1) {
 				 res = false;
 			}
-		}
 		return res;
 	}
 	static boolean isPartNameSame(String partName1, String partName2) {
