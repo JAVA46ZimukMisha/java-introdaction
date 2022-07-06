@@ -8,7 +8,7 @@ public class Strings {
 		StringBuilder orderOpenedBr = new StringBuilder();
 		for (int i = 0; i < textChar.length; i++) {
 			if (!checkIfItOpenBr(brOpen, orderOpenedBr, textChar[i])) {
-				if (!checkIfItCloseBr(brClose, orderOpenedBr, textChar[i])) {
+				if (!checkIfItCloseBr(brClose, brOpen, orderOpenedBr, textChar[i])) {
 					return false;
 				}
 			}
@@ -18,11 +18,11 @@ public class Strings {
 		return true;
 	}
 
-	private static boolean checkIfItCloseBr(char[] brClose, StringBuilder orderOpenedBr, char c) {
+	private static boolean checkIfItCloseBr(char[] brClose, char[] brOpen, StringBuilder orderOpenedBr, char c) {
 		boolean isItPossible = true;
 		for (int i = 0; i < brClose.length; i++) {
-			if (c == ')' || c == ']' || c == '}') {
-				isItPossible = orderOpenedBr.length() == 0 ? false : removeIfCouple(orderOpenedBr, c);
+			if (c == brClose[0] || c == brClose[1] || c == brClose[2]) {
+				isItPossible = orderOpenedBr.length() == 0 ? false : removeIfCouple(orderOpenedBr, c, brOpen , brClose);
 			}
 		}
 		return isItPossible;
@@ -31,7 +31,7 @@ public class Strings {
 	private static boolean checkIfItOpenBr(char[] brOpen, StringBuilder orderOpenedBr, char c) {
 		boolean ifItOpBr = true;
 		for (int i = 0; i < brOpen.length; i++) {
-			if (c != '(' && c != '[' && c != '{') {
+			if (c != brOpen[0] && c != brOpen[1] && c != brOpen[2]) {
 				ifItOpBr = false;
 			} else {
 				orderOpenedBr.append(c);
@@ -40,10 +40,10 @@ public class Strings {
 		return ifItOpBr;
 	}
 
-	private static boolean removeIfCouple(StringBuilder orderOpenedBr, char c) {
-		if ((c == ')' && orderOpenedBr.charAt(orderOpenedBr.length() - 1) == '(')
-				|| (c == ']' && orderOpenedBr.charAt(orderOpenedBr.length() - 1) == '[')
-				|| (c == '}' && orderOpenedBr.charAt(orderOpenedBr.length() - 1) == '{')) {
+	private static boolean removeIfCouple(StringBuilder orderOpenedBr, char c, char[] brOpen, char[] brClose) {
+		if ((c == brClose[0] && orderOpenedBr.charAt(orderOpenedBr.length() - 1) == brOpen[0])
+				|| (c == brClose[1] && orderOpenedBr.charAt(orderOpenedBr.length() - 1) == brOpen[1])
+				|| (c == brClose[2] && orderOpenedBr.charAt(orderOpenedBr.length() - 1) == brOpen[2])) {
 			orderOpenedBr.deleteCharAt(orderOpenedBr.length() - 1);
 			return true;
 		}
