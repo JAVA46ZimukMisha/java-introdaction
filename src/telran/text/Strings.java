@@ -8,16 +8,16 @@ public class Strings {
 		StringBuilder orderOpenedBr = new StringBuilder();
 		boolean res = true;
 		for (int i = 0; i < Tlength; i++) {
-			if (brOpen.indexOf(text.charAt(i))>=0) {
+			if (brOpen.indexOf(text.charAt(i)) >= 0) {
 				orderOpenedBr.append(text.charAt(i));
+			} else if (brClose.indexOf(text.charAt(i)) >= 0) {
+				res = orderOpenedBr.length() == 0 ? false
+						: removeIfCouple(orderOpenedBr, text.charAt(i), brOpen, brClose);
 			}
-			else if(brClose.indexOf(text.charAt(i))>=0) {
-				res = orderOpenedBr.length() == 0 ? false : removeIfCouple(orderOpenedBr, text.charAt(i), brOpen , brClose);
-				}
-			if(!res) {
+			if (!res) {
 				return false;
 			}
-			}
+		}
 		if (orderOpenedBr.length() != 0)
 			return false;
 		return true;
