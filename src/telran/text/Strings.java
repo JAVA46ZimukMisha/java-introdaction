@@ -1,33 +1,38 @@
 package telran.text;
-
+import static telran.text.RegularExpressions.*;
 public class Strings {
-	public static boolean hasaValidBrackets(String text) {
-		int Tlength = text.length();
-		String brOpen = "([{";
-		String brClose = ")]}";
-		StringBuilder orderOpenedBr = new StringBuilder();
-		boolean res = true;
-		for (int i = 0; i < Tlength; i++) {
-			if (brOpen.indexOf(text.charAt(i)) >= 0) {
-				orderOpenedBr.append(text.charAt(i));
-			} else if (brClose.indexOf(text.charAt(i)) >= 0) {
-				res = orderOpenedBr.length() == 0 ? false
-						: removeIfCouple(orderOpenedBr, text.charAt(i), brOpen, brClose);
-			}
-			if (!res) {
-				return false;
-			}
-		}
-		if (orderOpenedBr.length() != 0)
+	public static boolean isArithmeticExpression(String expression) {
+		if(!checkParentheses(expression)) {
 			return false;
-		return true;
-	}
-
-	private static boolean removeIfCouple(StringBuilder orderOpenedBr, char c, String brOpen, String brClose) {
-		if (orderOpenedBr.charAt(orderOpenedBr.length() - 1) == brOpen.charAt(brClose.indexOf(c))) {
-			orderOpenedBr.deleteCharAt(orderOpenedBr.length() - 1);
-			return true;
 		}
-		return false;
+		expression = removeSpacesAndParentheses(expression);
+		return expression.matches(arithmeticExpression());
+	}
+	private static String removeSpacesAndParentheses(String expression) {
+		expression = expression.replace("(", "");
+		expression = expression.replace(")", "");
+		expression = expression.replace(" ","");
+		return expression;
+	}
+	private static boolean checkParentheses(String expression) {
+		int strLength = expression.length();
+		int par = 0;
+		String operators = "*/+-";
+		for(int i=0; i<strLength; i++) {
+			if(expression.charAt(i)=='(') {
+				par++;
+				if(i>=1 && i<strLength-1 && (operators.indexOf(expression.charAt(i-1))<0 || operators.indexOf(expression.charAt(i+1))>=0)) {
+					return false;
+				}
+			}
+			if(expression.charAt(i)==')') {
+				par--;
+				if(i>=1 && i<strLength-1 &&(operators.indexOf(expression.charAt(i-1))>=0 || operators.indexOf(expression.charAt(i+1))<0)) {
+					return false;
+				}
+			}
+			if (par<0) return false;
+		}
+		return par==0 ? true:false;
 	}
 }
