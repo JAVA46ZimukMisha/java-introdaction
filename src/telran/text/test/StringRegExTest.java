@@ -16,6 +16,8 @@ public class StringRegExTest {
 	@Test
 	void arithmeticExpressionFalse() {
 		assertFalse(isArithmeticExpression(")-1+3("));
+		assertFalse(isArithmeticExpression("(+b+c)+7"));
+		assertFalse(isArithmeticExpression("b+(c+7+)"));
 		assertFalse(isArithmeticExpression("-1+3"));
 		assertFalse(isArithmeticExpression("x+y-(__*$)++2.1+()-2"));//if inside of brackets there is no symbols it returns false;
 		assertFalse(isArithmeticExpression("x+y-(__*$)+.1"));
